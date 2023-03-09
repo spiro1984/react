@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from "react";
-const Clock = (props) => {
+import PropTypes from "prop-types";
+
+const Clock = ({ name, customInterval }) => {
   const [date, setdate] = useState(new Date());
   useEffect(() => {
-    const interval = setInterval(() => setdate(new Date()), 1000);
+    const interval = setInterval(() => setdate(new Date()), customInterval);
     return () => clearInterval(interval);
   }, []);
   return (
     <>
-      <h1>Hello {props.name}</h1>
+      <h1>Hello {name}</h1>
       <p>It is {date.toLocaleTimeString()}</p>
     </>
   );
 };
+
+Clock.propTypes = {
+  name: PropTypes.string,
+  customInterval: PropTypes.number,
+};
+
 export default Clock;
